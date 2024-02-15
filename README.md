@@ -1,4 +1,8 @@
-# Stealthy VM - Looks like a terminal on your Mac but scales to a fully working i3 desktop.
+
+# Stealthy VM 
+
+It Looks like a terminal on your Mac but scales to a fully working i3 desktop.
+
 Since I develop for Linux systems, I need a reliable Linux VM on my Mac. I also want it to support GUI apps, since I want to be able to use it as my primary development platform, not just a text based terminal.
 However, Since I already have a great graphical environment on my Mac, with a highly optimized web browser and Visual Studio code running, I want to be able to use all of that together with my guest VM without introducing
 yet another graphical desktop running inside of my regular desktop. I dont want to have to move files back and forth between the Host and VM. They should optimally just be there, in my home directory like on the Mac.
@@ -475,18 +479,12 @@ The default mouse cursor is ugly and small. Let's make it a bit bigger and nicer
 ## Font
 ### Downloading and Installing Overpass Mono Font
 Overpass Mono is a monospace font that is suitable for terminal applications and coding. Here are the steps to download and install it:
-1. Open a terminal.
-1. Download the Overpass Mono font from its GitHub repository using the `wget` command:
+1. Download the Overpass Mono font from its GitHub repository from the release page at `https://github.com/RedHatBrand/Overpass/releases`
+1. The unzipped folder contains the Overpass Mono font files. On my machine, It ended up in `~/Downloads/Overpass-3.0.5/desktop-fonts/overpass-mono`
     ```bash
-    wget https://github.com/RedHatBrand/Overpass/releases/download/3.0.2/overpass-mono.zip
-    ```
-1. Unzip the downloaded file:
-    ```bash
-    unzip overpass-mono.zip
-    ```
-1. The unzipped folder contains the Overpass Mono font files in TTF format. Move these files to your fonts directory:
-    ```bash
-    mv OverpassMono*.otf ~/.local/share/fonts
+    mkdir -p ~/.local/share/fonts
+    cd ~/Downloads/Overpass-3.0.5/desktop-fonts/overpass-mono
+    mv overpass-mono* ~/.local/share/fonts
     ```
 1. Update the font cache to make the new font available:
     ```bash
