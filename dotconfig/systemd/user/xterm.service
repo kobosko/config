@@ -1,0 +1,15 @@
+[Unit]
+Description=xterm Service
+
+[Service]
+Type=simple
+Restart=always
+RestartMode=direct
+RestartSec=0
+Environment=DISPLAY=:0
+ExecStart=xterm
+StartLimitInterval=0 
+
+[Install]
+WantedBy=default.target
+
