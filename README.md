@@ -1,6 +1,6 @@
 
 # Stealthy VM 
-
+![Screenshot of Stealthy VM in action](img/screenshot.png)
 It Looks like a terminal on your Mac but scales to a fully working i3 desktop.
 
 Since I develop for Linux systems, I need a reliable Linux VM on my Mac. I also want it to support GUI apps, since I want to be able to use it as my primary development platform, not just a text based terminal.
