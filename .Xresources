@@ -51,7 +51,7 @@ xterm.vt100.faceName: Overpass Mono
 xterm*faceSize: 14
 xterm*scrollBar: false
 xterm*selectToClipboard: true
-xterm*VT100.Translations:       #override \
-        Ctrl Shift <Key>V:      insert-selection(CLIPBOARD) \n\
-        Ctrl Shift <Key>C:      copy-selection(CLIPBOARD) 
+*VT100.Translations:   #override \
+        Super <Key>c: copy-selection(CLIPBOARD)  \n\
+        Super <Key>v: insert-selection(CLIPBOARD)
 
