@@ -231,7 +231,7 @@ The i3 window manager is highly customizable. You can adjust the appearance and 
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
     bindsym $mod+h split h
-    bindsym $mod+v split v
+    bindsym $mod+Shift+h split v
     set $ws1 "1"
     set $ws2 "2"
     
@@ -364,14 +364,14 @@ The `~/bin/refresh.sh` script is used to adjust the screen resolution when the V
     chmod +x ~/bin/autorefresh.sh
     ```
 ## Copy-Paste Keyboard Shortcuts
-To add keyboard shortcuts for copy and paste operations in X11 applications, you can configure the `.Xresources` file. This guide will show you how to set Ctrl+Shift+C for copy and Ctrl+Shift+V for paste.
+To add keyboard shortcuts for copy and paste operations in X11 applications, you can configure the `.Xresources` file. This guide will show you how to set Command+C for copy and Command+V for paste.
 
 1. Edit the `.Xresources` file. If the file does not exist, this command will create it. Add the following lines to the file to set the copy and paste shortcuts:
     ```bash
     xterm*selectToClipboard: true
     *VT100.translations: #override \
-        Shift Ctrl <Key>c: copy-selection(CLIPBOARD) \n\
-        Shift Ctrl <Key>v: insert-selection(CLIPBOARD) 
+        Super <Key>c: copy-selection(CLIPBOARD) \n\
+        Super <Key>v: insert-selection(CLIPBOARD) 
     ```
 1. Save and close the file.
 1. To make the changes take effect, you need to merge the `.Xresources` file with your current resources. Run the following command:
