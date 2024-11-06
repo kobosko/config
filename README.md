@@ -368,10 +368,18 @@ To add keyboard shortcuts for copy and paste operations in X11 applications, you
 
 1. Edit the `.Xresources` file. If the file does not exist, this command will create it. Add the following lines to the file to set the copy and paste shortcuts:
     ```bash
-    xterm*selectToClipboard: true
-    *VT100.translations: #override \
+    XTerm*urf8: 1
+    XTerm*locale: true
+    XTerm*metaSendsEscape: true
+    XTerm*selectToClipboard: true
+    XTerm*VT100.Translations: #override \
         Super <Key>c: copy-selection(CLIPBOARD) \n\
-        Super <Key>v: insert-selection(CLIPBOARD) 
+        Super <Key>v: insert-selection(CLIPBOARD)
+
+    XTerm*VT100.selectToClipboard: true
+    XTerm*trimSelection: true
+    XTerm*cutNewLine: false
+    XTerm*cutToBeginningOfLine: false
     ```
 1. Save and close the file.
 1. To make the changes take effect, you need to merge the `.Xresources` file with your current resources. Run the following command:
@@ -386,9 +394,9 @@ Note: These changes will only take effect in X11 applications that use the stand
 The `.xinitrc` file is a shell script read by `xinit` and `startx`. Use it to start the i3 window manager, the `spice-vdagent` and the `autorefresh.sh` script that we created earlier:
 1. Edit the `.xinitrc` file. This file is located in your home directory:
     ```bash
-    exec xrdb -load ~/.Xresources&
-    exec spice-vdagent&
-    exec ~/bin/autorefresh.sh&
+    exec xrdb -load ~/.Xresources &
+    exec spice-vdagent &
+    exec ~/bin/autorefresh.sh &
     exec i3
     ```
 1. Save and close the file.
@@ -404,11 +412,7 @@ Once this works, you can now rely on copy-paste for the rest of the document.
 ## Font Rendering
 You can customize the appearance of X applications by setting various X resources. Here are some settings that you can use to adjust the font rendering and cursor size:
 
-1. Edit the `.Xresources` file. If the file does not exist, this command will create it:
-    ```bash
-    nano ~/.Xresources
-    ```
-1. Add these lines to provide for a proper font rendering for modern hidpi displays. Make sure to set the dpi value below to match your current monitor.
+1. Add these lines to .Xresources to provide for a proper font rendering for modern hidpi displays. Make sure to set the dpi value below to match your current monitor.
     ```bash
     Xft.dpi: 140
     Xft.antialias: true
@@ -426,7 +430,7 @@ The default mouse cursor is ugly and small. Let's make it a bit bigger and nicer
     ```
 1. Add the Bibata mouse cursor theme that we installed earlier to your `~/.Xresources` file:   
     ```bash
-    Xcursor.size: 64
+    Xcursor.size: 32
     Xcursor.theme: Bibata
     ```
 ## Colors
