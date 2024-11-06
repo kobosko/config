@@ -368,7 +368,7 @@ To add keyboard shortcuts for copy and paste operations in X11 applications, you
 
 1. Edit the `.Xresources` file. If the file does not exist, this command will create it. Add the following lines to the file to set the copy and paste shortcuts:
     ```bash
-    XTerm*urf8: 1
+    XTerm*utf8: 1
     XTerm*locale: true
     XTerm*metaSendsEscape: true
     XTerm*selectToClipboard: true
