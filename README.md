@@ -38,18 +38,6 @@ This is how I solved it:
 1. Change the name of your VM (optional).
 1. Click "Save."
 
-## Post-Installation Steps
-1. Wait for the basic packages to finish installing on your VM partition.
-1. Once the installation is complete, you'll be prompted to configure the package manager. Choose the Swedish mirror for package updates. You can use the mirror URL: deb.debian.org.1. Continue answering the questions in the wizard. 
-1. Wait until the entire installation process is done.
-1. When asked about additional packages, choose "Do not choose any additional packages" and continue.
-1. Allow the machine to reboot.
-1. After the machine reboots, shut it down by closing the window.
-1. Right-click your new machine in the UTM dialog and choose "Edit."
-1. In the UTM configuration editor, scroll down to the drive (around 500 MB) that represents the bootable ISO.
-1. Right-click on the drive representing the bootable ISO and choose "Delete" from the VM.
-1. Click "Save" in the UTM configuration editor.
-1. Start your new VM.
 
 ## Configuration of Debian Machine
 ### Sudo
@@ -75,7 +63,7 @@ To automatically log in to your user account during boot, you can configure the 
 
 1. Edit the agetty service configuration file using a text editor:
     ```bash
-    sudo nano /etc/systemd/system/getty.target.wants/getty@tty1.service
+    sudo vi /etc/systemd/system/getty.target.wants/getty@tty1.service
     ```
 2. Add an empty ExecStart= and an ExecStart that autologins `your_username` lines to the file:
     ```plaintext
@@ -99,10 +87,10 @@ In Linux, the Virtio drivers play a crucial role in enhancing the performance of
 ### Editing the Initramfs Modules File
 The `modules` file located at `/etc/initramfs-tools/modules` contains a list of modules that are included in the initramfs. To add Virtio drivers, follow these steps:
 
-1. Open the `modules` file using your preferred text editor. In this example, we'll use `nano`:
+1. Open the `modules` file using your preferred text editor. In this example, we'll use `vi`:
 
     ```bash
-    sudo nano /etc/initramfs-tools/modules
+    sudo vi /etc/initramfs-tools/modules
     ```
 
 2. Add the Virtio modules to the file. Include the following lines if they are not already present:
@@ -124,9 +112,9 @@ The `modules` file located at `/etc/initramfs-tools/modules` contains a list of 
     virtio_net
     ```
 ## Mounting on boot
-1. Edit the `/etc/fstab` file using a text editor such as `nano` or `vim`:
+1. Edit the `/etc/fstab` file using a text editor such as `vi` or `vim`:
     ```bash
-    sudo nano /etc/fstab
+    sudo vi /etc/fstab
     ```
 1. Add the following line to the end of the file:
     ```plaintext
@@ -153,7 +141,7 @@ every line in manually. This is important, since we won't have native copy-paste
 ## Installing Neccessary packages
 1. Install the X11 server, xterm, and i3 window manager by running the following command:
     ```bash
-    sudo apt install -y xorg xterm i3 rofi
+    sudo apt install -y xorg xterm i3
     ```
 1. Make sure that no display manager is installed. By default, Debian installs the `lightdm` display manager with `Xorg`:
     ```bash
@@ -274,10 +262,10 @@ The i3 window manager is highly customizable. You can adjust the appearance and 
 1. To make the changes take effect, you need to restart i3. You can do this by pressing `Mod+Shift+R`.
 
 ### Start X11 on boot
-1. Use a text editor, such as `nano` or `vim`, to create a new systemd unit file. For example:
+1. Create a new systemd unit file. For example:
 
     ```bash
-    sudo nano /etc/systemd/system/startx.service
+    sudo vi /etc/systemd/system/startx.service
     ```
 1. In the text editor, add the following content to the `startx.service` file:
 
@@ -287,8 +275,8 @@ The i3 window manager is highly customizable. You can adjust the appearance and 
     After=graphical.target systemd-user-sessions.service
     
     [Service]
-    User=kobosko
-    WorkingDirectory=/home/kobosko
+    User=<YOUR_USERNAME>
+    WorkingDirectory=/home/<YOUR_USERNAME>
     PAMName=login
     Environment=XDG_SESSION_TYPE=x11
     TTYPath=/dev/tty8
@@ -305,7 +293,7 @@ The i3 window manager is highly customizable. You can adjust the appearance and 
     WantedBy=graphical.target
 
     ```
-    Replace `your_username` with the actual username for which you want xterm to start. This will start X11 using the `startx` script on VTY 8 replacing the usual login mechanism
+    Replace `<YOUR_USERNAME>` with the actual username for which you want xterm to start. This will start X11 using the `startx` script on VTY 8 replacing the usual login mechanism
 
 1. Reload the systemd manager configuration to recognize the new unit file:
 
@@ -368,18 +356,26 @@ To add keyboard shortcuts for copy and paste operations in X11 applications, you
 
 1. Edit the `.Xresources` file. If the file does not exist, this command will create it. Add the following lines to the file to set the copy and paste shortcuts:
     ```bash
-    XTerm*utf8: 1
-    XTerm*locale: true
-    XTerm*metaSendsEscape: true
-    XTerm*selectToClipboard: true
-    XTerm*VT100.Translations: #override \
-        Super <Key>c: copy-selection(CLIPBOARD) \n\
-        Super <Key>v: insert-selection(CLIPBOARD)
+    Xft.hintstyle: hintfull
+    Xcursor.theme: Bibata
+    Xcursor.size: 32
 
-    XTerm*VT100.selectToClipboard: true
-    XTerm*trimSelection: true
-    XTerm*cutNewLine: false
-    XTerm*cutToBeginningOfLine: false
+    *faceSize: 8
+    *.vt100.faceName: xft:DroidSansM Nerd Font
+    *.vt100.faceSize: 11
+    *utf8: 1
+    *locale: true
+    *metaSendsEscape: true
+    *selectToClipboard: true
+    *VT100.Translations: #override \
+       Super <Key>c: copy-selection(CLIPBOARD) \n\
+       Super <Key>v: insert-selection(CLIPBOARD)
+
+    *VT100.selectToClipboard: true
+    *trimSelection: true
+    *cutNewLine: false
+    *cutToBeginningOfLine: false
+
     ```
 1. Save and close the file.
 1. To make the changes take effect, you need to merge the `.Xresources` file with your current resources. Run the following command:
@@ -412,7 +408,7 @@ Once this works, you can now rely on copy-paste for the rest of the document.
 ## Font Rendering
 You can customize the appearance of X applications by setting various X resources. Here are some settings that you can use to adjust the font rendering and cursor size:
 
-1. Add these lines to .Xresources to provide for a proper font rendering for modern hidpi displays. Make sure to set the dpi value below to match your current monitor.
+1. Add these lines to the top of .Xresources to provide for a proper font rendering for modern hidpi displays. Make sure to set the dpi value below to match your current monitor.
     ```bash
     Xft.dpi: 140
     Xft.antialias: true
