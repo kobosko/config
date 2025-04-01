@@ -12,33 +12,6 @@ that can run X11 applications such as a full web browser? Optimally, it should j
 
 This is how I solved it:
 
-## Installation
-1. Download and install UTM from [https://mac.getutm.app](https://mac.getutm.app).
-1. Start UTM and create a new virtual machine (VM) by choosing File -&gt; New -&gt; Virtualize.
-1. Select Linux as the guest OS and check the "Use Apple Virtualization" checkbox.
-1. Click "Browse" and select the Debian ISO installation image.
-1. Click "Continue."
-1. Choose 16 GB memory, leave the core count as default, and hit "Continue."
-1. After step 9, choose the size of the disk to be 10 GB.
-1. Set the shared path to your home directory on your Mac.
-1. Click "Continue" and change the name of your VM to something better than "Linux" (optional).
-1. Click "Save."
-
-## Setting Up UTM for Debian Installation
-1. Start UTM.
-1. Choose File -&gt; New -&gt; Virtualize.
-1. Choose Linux.
-1. Check the "Use Apple Virtualization" checkbox.
-1. Click "Browse" and select the Debian ISO installation image, then click "Open."
-1. Click "Continue."
-1. Choose 16 GB memory, leave the core count as default, and hit "Continue."
-1. Set the shared path to your home directory on your Mac.
-1. Choose the size of the disk to be 10 GB.
-1. Click "Continue."
-1. Change the name of your VM (optional).
-1. Click "Save."
-
-
 ## Configuration of Debian Machine
 ### Sudo
 To enable the default user to run `sudo` in Debian, you need to add the user to the `sudo` group. Here's how you can do it:
